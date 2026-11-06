@@ -89,8 +89,10 @@ a:focus-visible {
 /* ---------- Layout ---------- */
 
 .container {
-    width: min(1120px, calc(100% - 32px));
+    width: min(1120px, 100%);
     margin-inline: auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
 
 .narrow {
@@ -188,11 +190,20 @@ a:focus-visible {
     background: var(--indigo-100);
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: rgba(251, 250, 247, 0.94);
+}
+
 /* ---------- Cabeçalho ---------- */
 
 .site-header {
     position: sticky;
-    top: 0;
+    top: env(safe-area-inset-top, 0px);
     z-index: 10;
     background: rgba(251, 250, 247, 0.94);
     backdrop-filter: blur(8px);
